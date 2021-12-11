@@ -7,8 +7,12 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     if params[:search].present?
       @pets = Pet.search(params[:search])
-      redirect_to "/applications/#{@application.id}"
-    end 
+    end
+
+    if params[:adoption_id].present?
+      @pet = Pet.find(params[:adoption_id])
+      ApplicationPet.create!(application: @application, pet: @pet)
+    end
   end
 
   def new
