@@ -33,4 +33,15 @@ RSpec.describe 'applications show page' do
   it 'shows application status' do
     expect(page).to have_content(@application.status)
   end
+
+  it 'can search for pets' do
+    fill_in('search', with: 'Stitch')
+    click_button('Search')
+
+    expect(current_path).to eq("/applications/#{@application.id}")
+    expect(page).to have_content('Stitch')
+
+    click_link('Stitch')
+    expect(current_path).to eq("/pets/#{@pet.id}")
+  end
 end
