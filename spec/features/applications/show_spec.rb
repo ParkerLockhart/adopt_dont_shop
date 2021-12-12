@@ -46,13 +46,19 @@ RSpec.describe 'applications show page' do
     expect(@application.pets).to include(@pet)
   end
 
-  xit 'submits application' do
-    @application.pets << @pet
+  it 'submits the application' do
+    fill_in('search', with: 'Stitch')
+    click_button('Search')
+    click_button('Adopt this Pet')
+    within("#application_submit-#{@application.id}") do
 
-    fill_in('description', with: 'I love animals.')
-    click_button('Submit')
+      fill_in('description', with: 'I love animals.')
+      click_button('Submit')
+    end
     expect(current_path).to eq("/applications/#{@application.id}")
-    expect(@application.description).to eq('I love animals.')
-    expect(@application.status).to eq("Pending")
+    expect(page).to have_content('I love animals.')
+    expect(page).to have_content("Pending")
+    expect(page).to_not have_content("In Progress")
   end
+
 end
