@@ -8,11 +8,12 @@ class ApplicationsController < ApplicationController
     if params[:search].present?
       @pets = Pet.search(params[:search])
     end
-
+    
     if params[:adoption_id].present?
       @pet = Pet.find(params[:adoption_id])
       ApplicationPet.create!(application: @application, pet: @pet)
     end
+
   end
 
   def new
@@ -25,6 +26,16 @@ class ApplicationsController < ApplicationController
       redirect_to "/applications/#{application.id}"
     else
       redirect_to '/applications/new'
+      flash[:alert] = "Error: #{error_message(application.errors)}"
+    end
+  end
+
+  def update
+    application = Application.find(params[:id])
+    if application.update(application_params)
+      redirect_to "/applications/#{application.id}"
+    else
+      redirect_to "/applications/#{application.id}"
       flash[:alert] = "Error: #{error_message(application.errors)}"
     end
   end
