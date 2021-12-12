@@ -5,6 +5,7 @@ RSpec.describe 'applications show page' do
 
     @shelter = Shelter.create!(name: "City Rescue", city: "Starfield", rank: 4, foster_program: true)
     @pet = Pet.create!(name: "Stitch", breed: "Whatever", age: 3, adoptable: true, shelter_id: @shelter.id )
+    @pet1 = Pet.create!(name: "mr. fluff", breed: "Floof", age: 2, adoptable: true, shelter_id: @shelter.id )
     @application = Application.create!(name: "Amy", street_address: "5223 Lovely Ln.", city: "Starfield", state: "TX", zip_code: "78230", description: "description", status: "In Progress")
 
     visit "/applications/#{@application.id}"
@@ -36,6 +37,14 @@ RSpec.describe 'applications show page' do
     expect(current_path).to eq("/applications/#{@application.id}")
     expect(page).to have_content('Stitch')
   end
+
+  it 'finds a pet with partial matching' do
+    fill_in('search', with: 'fluff')
+    click_button('Search')
+
+    expect(current_path).to eq("/applications/#{@application.id}")
+    expect(page).to have_content(@pet1.name)
+  end 
 
   it 'can add pet to application' do
     fill_in('search', with: 'Stitch')
