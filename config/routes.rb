@@ -39,5 +39,5 @@ Rails.application.routes.draw do
 
   resources :applications
 
-  get '/admin', to: 'admin#index'
+  get '/admin/shelters', to: 'admin#shelters'
 end
