@@ -38,4 +38,13 @@ RSpec.describe 'admin applications show page' do
     expect(current_path).to eq("/admin/applications/#{@app_1.id}")
     expect(page).to have_content("Adoption status: APPROVED")
   end
+
+  it 'can reject pets on application' do
+    visit "/admin/applications/#{@app_1.id}"
+    within("#admin-application-#{@lucy.id}") do
+      click_link("Reject")
+    end
+    expect(current_path).to eq("/admin/applications/#{@app_1.id}")
+    expect(page).to have_content("Adoption status: REJECTED")
+  end 
 end
