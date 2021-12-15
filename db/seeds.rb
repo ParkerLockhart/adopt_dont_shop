@@ -19,9 +19,11 @@ stitch = shelter_4.pets.where(name: "Stitch", breed: "Whatever", age: 3, adoptab
 ann = shelter_1.pets.where(name: 'Ann', breed: 'ragdoll', age: 3, adoptable: false).first_or_create
 
 app_1 = Application.where(name: "Amy", street_address: "5223 Lovely Ln.", city: "Starfield", state: "TX", zip_code: "78230", description: "I want to take care of a pet who needs help.", status: "In Progress").first_or_create
-
+app_2 = Application.where(name: "Jason", street_address: "Warp Dr.", city: "Orion", state: "CO", zip_code: "80918", description: "Because", status: "In Progress").first_or_create
 app_1.pets << stitch
 app_1.pets << lucy
+app_2.pets << stitch
+app_2.pets << pirate
 
 vet_office = VeterinaryOffice.where(name: 'Best Vets', boarding_services: true, max_patient_capacity: 20).first_or_create
 vet_office_2 = VeterinaryOffice.where(name: 'Vets R Us', boarding_services: true, max_patient_capacity: 20).first_or_create
