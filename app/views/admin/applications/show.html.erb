@@ -1,0 +1,11 @@
+<% @application.application_pets.each do |application_pet| %>
+  <section id ="admin-application-<%= application_pet.pet_id %>">
+  <%= application_pet.pet.name %>
+  <% if application_pet.approved == false %>
+    <button><%= link_to "Approve Adoption", "/admin/applications/#{@application.id}?approve=#{application_pet.id}" %></button>
+    <button><%= link_to "Reject Adoption", "/admin/applications/#{@application.id}?reject=#{application_pet.id}" %></button>
+  <% elsif application_pet.approved == true %>
+    Adoption status: APPROVED
+  <% end %>
+  </section>
+<% end %>
