@@ -5,14 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-ApplicationPet.destroy_all
-Pet.destroy_all
-Shelter.destroy_all
-Application.destroy_all
-Veterinarian.destroy_all
-VeterinaryOffice.destroy_all
-
-
 shelter_1 = Shelter.where(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9).first_or_create
 shelter_2 = Shelter.where(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5).first_or_create
 shelter_3 = Shelter.where(name: 'Fancy pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10).first_or_create
