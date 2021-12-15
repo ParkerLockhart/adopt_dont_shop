@@ -1,0 +1,6 @@
+<h1>ADMIN</h1>
+
+<% @applications.each do |app| %>
+  <h3><%= link_to "#{app.name}", "/applications/#{app.id}" %></h3>
+  <%= app.status %>
+<% end %><br><hr>
