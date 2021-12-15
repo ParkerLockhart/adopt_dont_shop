@@ -39,5 +39,9 @@ Rails.application.routes.draw do
 
   resources :applications
 
-  get '/admin/shelters', to: 'admin#shelters'
+  namespace :admin do
+    resources :shelters, :applications
+  end
+  patch '/application_pets/:id', to: 'application_pets#update'
+
 end
